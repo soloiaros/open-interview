@@ -67,13 +67,44 @@ Everything is optional except the API key. See `.env.example`.
 
 `cd apps/web && npm test` runs the unit tests (quote grounding, markdown parsing). `npm run typecheck` checks types.
 
-## Where the build differs from REPOS.md
+## Open-source repositories
 
-| REPOS.md pick | MVP uses | Why |
+These are the open-source repositories this build takes from. The framework around them (Next.js, Tailwind, Radix, Drizzle, Postgres) is omitted. The full research list is in [REPOS.md](REPOS.md).
+
+### Used
+
+| Repo | What it does here | Why | Left out |
+|---|---|---|---|
+| [livekit/livekit](https://github.com/livekit/livekit) | WebRTC room, token, agent dispatch | Browser voice with no install | SIP, phone ingress |
+| [livekit/agents](https://github.com/livekit/agents) | Agent joins the room, interruptions, early reply, local turn detector | Same interview as text, spoken | Telephony, avatars, unused speech plugins, Cloud interruption |
+| [livekit/components-js](https://github.com/livekit/components-js) | Listening / thinking / speaking bar | Smallest interview screen | Video, screen share, prefab theme. The React starter was not forked |
+| [snakers4/silero-vad](https://github.com/snakers4/silero-vad) | Speech / non-speech gate | Needed before transcription | — |
+| [SYSTRAN/faster-whisper](https://github.com/SYSTRAN/faster-whisper) | CPU transcript, one utterance at a time | No GPU | Streaming partials, multilingual models |
+| [hexgrad/kokoro](https://github.com/hexgrad/kokoro) | English voice inside the agent | No extra speech server | Other languages, the Kokoro HTTP server |
+| [better-auth/better-auth](https://github.com/better-auth/better-auth) | Email, password, one org per team | Self-serve start | SSO, magic links, Stripe plugin |
+| [timgit/pg-boss](https://github.com/timgit/pg-boss) | Ingest queue after publish | Jobs stay in Postgres | Nightly lint |
+| [Tencent/WeKnora](https://github.com/Tencent/WeKnora) | Ingest shape: page plan, dedup, citations, slugs, revisions | Main wiki design. The code is rewritten here | Vue app, Neo4j, Feishu, DingTalk, multimodal |
+| [xoai/sage-wiki](https://github.com/xoai/sage-wiki) | A claim keeps its quote, source, and time. A disagreement stays visible | Evidence model | TUI, Obsidian, federation |
+| [mem0ai/mem0](https://github.com/mem0ai/mem0) | Merge choice: add, support, supersede, contradict, or noop | Only the decision prompt | Chat-memory runtime |
+| [Future-House/paper-qa](https://github.com/Future-House/paper-qa) | Ask cites a source, or says the wiki has no answer | Refusal rule | Paper clients |
+| [mermaid-js/mermaid](https://github.com/mermaid-js/mermaid) | Decision-tree block inside a document | A diagram without a second editor | — |
+| [dolanmiu/docx](https://github.com/dolanmiu/docx) | Word download | One file export | — |
+| [modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk) | `search_wiki`, `get_page`, `list_pages`, `ask`, `create_document` | Other agents can read the wiki | — |
+| [vercel/streamdown](https://github.com/vercel/streamdown) | Ask and Create while tokens are still arriving | Streaming markdown | KaTeX |
+| [remarkjs/react-markdown](https://github.com/remarkjs/react-markdown) | Finished wiki page, page links, claim citations | Stable page render | — |
+| [uiwjs/react-codemirror](https://github.com/uiwjs/react-codemirror) | Draft editor and wiki editor | The expert verifies the draft before publish | — |
+| [dip/cmdk](https://github.com/dip/cmdk) | Wiki search palette | Jump to a page | — |
+| [vasturiano/react-force-graph](https://github.com/vasturiano/react-force-graph) | 2D graph of page links | See how pages connect | 3D, VR |
+| [motiondivision/motion](https://github.com/motiondivision/motion) | Landing page motion | One marketing surface | Spring overshoot |
+| [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | Eight writing rules on every prose prompt | Less generic generated text | Full skill text at runtime |
+| [oil-oil/oil-ui](https://github.com/oil-oil/oil-ui) | Skill used while the screens were designed | Direction and review, not a component library | Update check, Pro ad |
+
+### Studied, not used
+
+| Group | Repositories | Why they stayed out |
 |---|---|---|
-| Vercel AI SDK + AI Elements | Official Anthropic SDK; own components; Streamdown | Model calls go through the official SDK, and the components follow the App&Flow style. |
-| Opus-class model | Claude Haiku 5.5 | Cheapest and fastest. Live turns run with thinking off. |
-| Nemotron STT (GPU) | faster-whisper `base.en` (CPU) | No GPU needed; measured 0.45 s per answer. |
-| Qwen3-TTS (GPU) / Kokoro server | Kokoro int8 inside the agent | No GPU and no extra server. |
-| Postgres + pgvector + pg_textsearch | Embedded Postgres, built-in full-text search | One command, no Docker, no extensions. |
-| LiveKit turn-detector plugin | `inference.TurnDetector(version="v1-mini")` | The old plugin is deprecated in Agents 1.8; v1-mini runs locally. |
+| Heavier voice | [k2-fsa/sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx), [kyutai-labs/delayed-streams-modeling](https://github.com/kyutai-labs/delayed-streams-modeling), [m-bain/whisperX](https://github.com/m-bain/whisperX), [QwenLM/Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS), [kyutai-labs/pocket-tts](https://github.com/kyutai-labs/pocket-tts), [resemble-ai/chatterbox](https://github.com/resemble-ai/chatterbox), [kyutai-labs/unmute](https://github.com/kyutai-labs/unmute) | GPU, an extra process, or a quality test this build has not run |
+| Retrieval and extraction | [pgvector/pgvector](https://github.com/pgvector/pgvector), [timescale/pg_textsearch](https://github.com/timescale/pg_textsearch), [HKUDS/LightRAG](https://github.com/HKUDS/LightRAG), [getzep/graphiti](https://github.com/getzep/graphiti), [tobi/qmd](https://github.com/tobi/qmd), [google/langextract](https://github.com/google/langextract), [567-labs/instructor](https://github.com/567-labs/instructor) | Keyword search and a local quote check cover the first wiki |
+| Document generation | [dzhng/deep-research](https://github.com/dzhng/deep-research), [stanford-oval/storm](https://github.com/stanford-oval/storm), [assafelovic/gpt-researcher](https://github.com/assafelovic/gpt-researcher), [xyflow/xyflow](https://github.com/xyflow/xyflow), [typst/typst](https://github.com/typst/typst), [jgm/pandoc](https://github.com/jgm/pandoc), [gitbrent/PptxGenJS](https://github.com/gitbrent/PptxGenJS), [jcputney/scorm-again](https://github.com/jcputney/scorm-again), [open-spaced-repetition/ts-fsrs](https://github.com/open-spaced-repetition/ts-fsrs), [meta-llama/synthetic-data-kit](https://github.com/meta-llama/synthetic-data-kit), [argilla-io/distilabel](https://github.com/argilla-io/distilabel) | Create is one writing pass plus a Mermaid tree and a Word file. Their prompts were the reference |
+| Platform | [vercel/ai](https://github.com/vercel/ai), [maximhq/bifrost](https://github.com/maximhq/bifrost), [BerriAI/litellm](https://github.com/BerriAI/litellm), [langfuse/langfuse](https://github.com/langfuse/langfuse), [promptfoo/promptfoo](https://github.com/promptfoo/promptfoo), [stanfordnlp/dspy](https://github.com/stanfordnlp/dspy), [hatchet-dev/hatchet](https://github.com/hatchet-dev/hatchet), [basecamp/kamal](https://github.com/basecamp/kamal), [coollabsio/coolify](https://github.com/coollabsio/coolify) | One model, one machine, `npm run dev` |
+| License blocks | [outline/outline](https://github.com/outline/outline), [docmost/docmost](https://github.com/docmost/docmost), [requarks/wiki](https://github.com/requarks/wiki), [infiniflow/ragflow](https://github.com/infiniflow/ragflow), [onyx-dot-app/onyx](https://github.com/onyx-dot-app/onyx), [paradedb/paradedb](https://github.com/paradedb/paradedb), [open-webui/open-webui](https://github.com/open-webui/open-webui), [ConardLi/easy-dataset](https://github.com/ConardLi/easy-dataset) | BSL, AGPL, a proprietary directory, or a branding clause |
