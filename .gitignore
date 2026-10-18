@@ -17,9 +17,3 @@ apps/web/next-env.d.ts
 *.pyc
 .pytest_cache
 .claude/scheduled_tasks.lock
-
-# Generated build and local agent state
-*.tsbuildinfo
-*.pyc
-.pytest_cache
-.claude/scheduled_tasks.lock
