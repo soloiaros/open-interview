@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* Tokens: palette and type from aprilleihuanani.com, control geometry from appandflow.com. See docs/design-spec.md. */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-surface: #141414;
+  --color-raised: #1e1e1e;
+  --color-ink: #f4f4f4;
+  --color-ink-2: #f4f4f4b8;
+  --color-ink-3: #f4f4f480;
+  --color-line: #f4f4f41f;
+  --color-tint: #f4f4f40f;
+  --color-accent: #0080ff;
+  --color-accent-tint: #0080ff26;
+  --color-danger: #ff5a4f;
+
+  --font-display: var(--font-instrument), "Times New Roman", serif;
+  --font-sans: "TeX Gyre Heros", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+
+  --radius-pill: 40px;
+  --radius-card: 24px;
+  --radius-tile: 16px;
+  --radius-tag: 4px;
+}
+
+@font-face { font-family: "TeX Gyre Heros"; src: url("../fonts/texgyreheros-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "TeX Gyre Heros"; src: url("../fonts/texgyreheros-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "TeX Gyre Heros"; src: url("../fonts/texgyreheros-bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+html { background: var(--color-bg); color: var(--color-ink); color-scheme: dark; }
+body { font-family: var(--font-sans); font-size: 15px; line-height: 1.6; word-spacing: -0.02em; -webkit-font-smoothing: antialiased; min-height: 100dvh; overflow-x: clip; }
+::selection { background: var(--color-accent-tint); }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+/* Display headline: Instrument Serif, uppercase, tight. */
+.display { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; letter-spacing: -0.005em; line-height: 0.95; }
+.serif-i { font-family: var(--font-display); font-style: italic; text-transform: none; letter-spacing: 0; }
+/* Micro label: DM Mono, uppercase. */
+.label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-ink-3); }
+
+/* App&Flow squish: the hover keyframe from their primary button, verbatim. */
+@keyframes squish {
+  0% { transform: scale(1, 1); }
+  33% { transform: scale(1.02, 0.98); }
+  66% { transform: scale(0.99, 1.01); }
+  100% { transform: scale(1, 1); }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+.enter > * { animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.enter > *:nth-child(2) { animation-delay: 50ms; }
+.enter > *:nth-child(3) { animation-delay: 100ms; }
+.enter > *:nth-child(4) { animation-delay: 150ms; }
+.enter > *:nth-child(5) { animation-delay: 200ms; }
+.enter > *:nth-child(n + 6) { animation-delay: 250ms; }
+
+/* Prose: wiki pages, drafts, generated documents, chat answers. */
+.prose { font-size: 16px; line-height: 1.7; color: var(--color-ink-2); max-width: 68ch; }
+.prose h1 { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1; text-transform: uppercase; color: var(--color-ink); margin: 0 0 24px; }
+.prose h2 { font-size: 13px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-ink-3); margin: 40px 0 12px; font-weight: 500; }
+.prose h3 { font-size: 17px; font-weight: 700; color: var(--color-ink); margin: 28px 0 8px; }
+.prose p { margin: 0 0 14px; }
+.prose strong { color: var(--color-ink); font-weight: 700; }
+.prose ul, .prose ol { margin: 0 0 16px; padding-left: 20px; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li { margin: 4px 0; }
+.prose li::marker { color: var(--color-ink-3); }
+.prose a { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-ink-3); text-underline-offset: 3px; }
+.prose a:hover { text-decoration-color: var(--color-ink); }
+.prose blockquote { border-left: 1px solid var(--color-line); padding-left: 16px; color: var(--color-ink-3); margin: 0 0 16px; }
+.prose code { font-family: var(--font-mono); font-size: 13px; background: var(--color-tint); padding: 1px 6px; border-radius: 4px; }
+.prose table { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 14px; }
+.prose th { text-align: left; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--color-ink-3); font-weight: 500; }
+.prose th, .prose td { border-bottom: 1px solid var(--color-line); padding: 8px 10px 8px 0; vertical-align: top; }
+.prose input[type="checkbox"] { accent-color: var(--color-accent); margin-right: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Streamdown ships Tailwind classes; let Tailwind see them. */
+@source "../../node_modules/streamdown/dist/*.js";
+
+/* LiveKit BarVisualizer, restyled: thin light bars, accent while speaking. */
+.voice-bars { display: flex; align-items: center; justify-content: center; gap: 10px; height: 160px; }
+.voice-bars > span { width: 10px; min-height: 10px; border-radius: 99px; background: var(--color-ink-3); transition: height 0.12s ease-out, background-color 0.3s; }
+.voice-bars > span[data-lk-highlighted="true"] { background: var(--color-ink); }
+.voice-bars[data-lk-va-state="speaking"] > span[data-lk-highlighted="true"] { background: var(--color-accent); }
