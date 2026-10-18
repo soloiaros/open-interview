@@ -1,4 +1,4 @@
-# Tacit
+# Open Interview
 
 An open-source MVP of [Tacivo](https://tacivo.com)'s core feature: an AI interviewer that pulls what an expert knows out of their head, by voice or text, and writes it up. Published interviews feed a small wiki you can ask questions of.
 

@@ -24,7 +24,7 @@ const text = (t: string) => ({ content: [{ type: "text" as const, text: t }] });
 
 /** One server per request (stateless). Tools are read-only except create_document, which returns text and stores nothing. */
 export function buildMcpServer(orgId: string) {
-  const server = new McpServer({ name: "tacivo-wiki", version: "1.0.0" });
+  const server = new McpServer({ name: "open-interview", version: "1.0.0" });
 
   server.registerTool(
     "search_wiki",
