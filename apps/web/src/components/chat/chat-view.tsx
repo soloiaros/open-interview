@@ -114,7 +114,7 @@ export function ChatView({ threadId, threads, initial }: { threadId?: string; th
         )}
         {error && <p className="text-[14px] text-danger">{error}</p>}
         <form
-          className="sticky bottom-28 flex items-center gap-3 rounded-card bg-surface p-3"
+          className="sticky bottom-6 flex items-center gap-3 rounded-card bg-surface p-3"
           onSubmit={(e) => {
             e.preventDefault();
             void ask(input);

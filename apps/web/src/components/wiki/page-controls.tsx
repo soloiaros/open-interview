@@ -58,7 +58,7 @@ export function PageControls(props: { id: string; slug: string; title: string; s
       </div>
 
       {editing && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 px-4 py-10 backdrop-blur-sm" onClick={() => setEditing(false)}>
+        <div className="gutter fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-ink/10 py-10 backdrop-blur-[6px]" onClick={() => setEditing(false)}>
           <div className="flex w-full max-w-[860px] flex-col gap-6 rounded-card bg-surface p-8" onClick={(e) => e.stopPropagation()}>
             <Field label="Title">
               <Input value={title} onChange={(e) => setTitle(e.target.value)} />

@@ -119,7 +119,7 @@ export function InterviewRoom(props: { id: string; title: string; modeLabel: str
         {error && <p className="text-[14px] text-danger">{error}</p>}
 
         {!voice && (
-          <div className="sticky bottom-28 flex flex-col gap-3 rounded-card bg-surface p-3">
+          <div className="sticky bottom-6 flex flex-col gap-3 rounded-card bg-surface p-3">
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}

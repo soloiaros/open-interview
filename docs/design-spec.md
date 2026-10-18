@@ -20,7 +20,7 @@
 - **Controls (App&Flow geometry):**
   - Primary: 52px pill, radius 40, inverted colours (dark pill on light), 12px/700 label, squish keyframe on hover.
   - Ghost: dotted SVG pill outline. Tile: 50px, radius 16, 6% tint.
-  - Round icon buttons. A floating segmented tab bar with backdrop blur.
+  - Round icon buttons. A floating segmented tab bar with backdrop blur, vertical, centered in the left margin. Icons only until hover, then it widens to show the labels. On small screens it stays hidden until the menu button, then sits vertical on the right over a light blur.
 - **Surfaces:** cards with radius 24 and 32px padding, never nested. Thin 1px borders only where whitespace can't separate.
 - **Icons:** characters first (→ ↗ ●). Where an icon is needed, Lucide at 1.5px stroke, 16px.
 - **Motion (the three basic motions):**
