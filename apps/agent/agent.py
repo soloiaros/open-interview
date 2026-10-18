@@ -170,7 +170,9 @@ def prewarm(proc: JobProcess) -> None:
     proc.userdata["kokoro"] = kokoro
 
 
-server = AgentServer()
+# Local speech models need more than the SDK's 10-second default on a cold CPU.
+# Warm one worker at startup so joining an interview doesn't pay that cost.
+server = AgentServer(num_idle_processes=1, initialize_process_timeout=90.0)
 server.setup_fnc = prewarm
 
 
@@ -196,7 +198,8 @@ async def entrypoint(ctx: JobContext) -> None:
             # Local end-of-turn model. Experts pause mid-thought, so wait longer than a support bot would.
             turn_detection=inference.TurnDetector(version="v1-mini"),
             endpointing={"min_delay": 0.6, "max_delay": 4.0},
-            interruption={"resume_false_interruption": True, "false_interruption_timeout": 1.0},
+            # Adaptive interruption defaults to LiveKit Cloud; this stack is local.
+            interruption={"mode": "vad", "resume_false_interruption": True, "false_interruption_timeout": 1.0},
             preemptive_generation={"enabled": True},
         ),
     )
