@@ -2,9 +2,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
+import { safeNext } from "@/lib/safe-next";
 import { Button, Field, Input } from "@/components/ui";
 
-export function AuthForm({ initialMode }: { initialMode: "sign-in" | "sign-up" }) {
+export function AuthForm({ initialMode, next }: { initialMode: "sign-in" | "sign-up"; next?: string }) {
   const router = useRouter();
   const [mode, setMode] = useState(initialMode);
   const [error, setError] = useState("");
@@ -21,7 +22,7 @@ export function AuthForm({ initialMode }: { initialMode: "sign-in" | "sign-up" }
         : await authClient.signIn.email({ email, password });
     setBusy(false);
     if (res.error) return setError(res.error.message ?? "That didn't work. Check your details.");
-    router.push("/app");
+    router.push(safeNext(next));
     router.refresh();
   }
 

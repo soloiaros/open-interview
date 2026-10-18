@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
 import { APP_NAME } from "@/lib/brand";
 import { buttonClass } from "@/components/ui";
 
@@ -11,9 +12,10 @@ const STEPS = [
   { n: "04", title: "Ask", text: "New people ask questions and get answers from your own team's experience, with the source attached." },
 ];
 
+const NEXT = "/app/interview/new";
+
 export function Landing({ signedIn }: { signedIn: boolean }) {
   const reduce = useReducedMotion();
-  const cta = signedIn ? { href: "/app", label: "Open workspace" } : { href: "/sign-in?mode=sign-up", label: "Start for free" };
   return (
     <div className="min-h-dvh">
       <header className="gutter flex items-center justify-between py-4">
@@ -32,9 +34,7 @@ export function Landing({ signedIn }: { signedIn: boolean }) {
           Interview the people who know how the work gets done.
         </h1>
         <p className="max-w-[36ch] text-[17px] leading-snug text-ink-2">Keep what they know after they leave.</p>
-        <Link href={cta.href} className={buttonClass()}>
-          {cta.label}
-        </Link>
+        <StartInterview signedIn={signedIn} />
       </section>
 
       <section className="gutter pt-8 pb-32">
@@ -80,9 +80,7 @@ export function Landing({ signedIn }: { signedIn: boolean }) {
             <span className="text-ink-2">Your interviews never train a model.</span>
           </p>
         </Reveal>
-        <Link href={cta.href} className={buttonClass()}>
-          {cta.label}
-        </Link>
+        <StartInterview signedIn={signedIn} />
       </section>
 
       <footer className="gutter flex items-center justify-between border-t border-line py-6 font-mono text-[11px] uppercase text-ink-2">
@@ -90,6 +88,53 @@ export function Landing({ signedIn }: { signedIn: boolean }) {
         <span>Interviews · Wiki · Documents · Answers</span>
       </footer>
     </div>
+  );
+}
+
+function StartInterview({ signedIn }: { signedIn: boolean }) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  if (signedIn) {
+    return (
+      <Link href={NEXT} className={buttonClass()}>
+        Start interview
+      </Link>
+    );
+  }
+
+  return (
+    <>
+      <button type="button" className={buttonClass()} onClick={() => setOpen(true)}>
+        Start interview
+      </button>
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center px-[var(--page-pad)] py-8 sm:items-center" role="dialog" aria-modal="true" aria-labelledby="sign-in-prompt">
+          <button type="button" aria-label="Close" className="absolute inset-0 bg-ink/10 backdrop-blur-[6px]" onClick={() => setOpen(false)} />
+          <div className="relative flex w-full max-w-[400px] animate-[rise_0.45s_cubic-bezier(0.2,0.7,0.2,1)_both] flex-col gap-8 rounded-card bg-surface p-8">
+            <h2 id="sign-in-prompt" className="text-[28px] leading-tight text-ink">
+              Sign in to start an interview.
+            </h2>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link href={`/sign-in?next=${encodeURIComponent(NEXT)}`} className={buttonClass()}>
+                Sign in
+              </Link>
+              <Link href={`/sign-in?mode=sign-up&next=${encodeURIComponent(NEXT)}`} className="text-[13px] text-ink-3 transition-colors hover:text-ink">
+                Create account
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
