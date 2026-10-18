@@ -2,7 +2,7 @@ import Link from "next/link";
 import { forwardRef, type ComponentProps, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-// Primary: App&Flow's 52px inverted pill with the squish hover. Light pill on the dark page.
+// Primary: App&Flow's 52px inverted pill with the squish hover. Dark pill on the light page.
 const primary =
   "inline-flex h-[52px] w-fit shrink-0 cursor-pointer items-center justify-center gap-2 rounded-pill bg-ink px-8 text-[12px] font-bold text-bg origin-bottom transition-[transform,opacity] duration-150 hover:animate-[squish_0.3s_ease-out] active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:animate-none";
 // Tile: App&Flow's 50px wide button on a 6% tint, radius 16.

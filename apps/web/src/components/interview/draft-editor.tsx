@@ -12,14 +12,14 @@ import { cn } from "@/lib/cn";
 
 export const editorTheme = EditorView.theme(
   {
-    "&": { backgroundColor: "transparent", color: "#f4f4f4", fontSize: "15px" },
-    ".cm-content": { fontFamily: "var(--font-mono)", caretColor: "#f4f4f4", padding: "0" },
+    "&": { backgroundColor: "transparent", color: "var(--color-ink)", fontSize: "15px" },
+    ".cm-content": { fontFamily: "var(--font-mono)", caretColor: "var(--color-ink)", padding: "0" },
     ".cm-gutters": { display: "none" },
     ".cm-activeLine": { backgroundColor: "transparent" },
     "&.cm-focused": { outline: "none" },
-    ".cm-selectionBackground, ::selection": { backgroundColor: "#0080ff40 !important" },
+    ".cm-selectionBackground, ::selection": { backgroundColor: "var(--color-accent-tint) !important" },
   },
-  { dark: true },
+  { dark: false },
 );
 
 export function DraftEditor(props: { id: string; title: string; modeLabel: string; initial: string; published: boolean; autoGenerate: boolean }) {
@@ -102,7 +102,7 @@ export function DraftEditor(props: { id: string; title: string; modeLabel: strin
         ) : (
           <>
             <label className="flex cursor-pointer items-start gap-3 text-[14px] leading-snug text-ink-2">
-              <input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} disabled={streaming || !md} className="mt-0.5 size-4 accent-[#0080ff]" />
+              <input type="checkbox" checked={verified} onChange={(e) => setVerified(e.target.checked)} disabled={streaming || !md} className="mt-0.5 size-4 accent-[var(--color-accent)]" />
               I read this draft and it says what I meant.
             </label>
             <Button onClick={publish} disabled={!verified || streaming || busy || !md}>

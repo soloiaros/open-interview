@@ -4,21 +4,21 @@
 
 - **Category:** B2B knowledge-capture tool. The people using it are experts with little time and the team leads who assign them interviews.
 - **First screen in the app:** start an interview, or continue one. Everything else comes second.
-- **North star:** a quiet dark room. One person talks and the company remembers.
+- **North star:** a quiet room. One person talks and the company remembers.
 - **Style source (fixed by the brief):**
   - aprilleihuanani.com supplies the palette and type.
   - appandflow.com supplies the controls and their geometry.
-- **Palette:**
-  - Background `#0a0a0a`, surface `#141414`, raised `#1e1e1e`.
-  - Text `#f4f4f4`, secondary text at 72%, tertiary at 40%.
-  - Borders `#f4f4f4` at 12%.
+- **Palette (light is the default; App&Flow's light values, April's accent):**
+  - Background `#f0f0f0`, surface `#ffffff`, raised `#ffffff`.
+  - Text `#121212`, secondary at 72%, tertiary `#5c5c5c` (40% ink fails contrast on this paper).
+  - Borders `#121212` at 12%. Tint at 6%.
   - One accent, `#0080ff`. It is used only for live state, the current topic, and citation chips.
 - **Type:**
   - Instrument Serif: display, uppercase for section titles, italic for one accent clause.
   - TeX Gyre Heros: all UI and body text, 15/24 for body.
   - DM Mono 500: uppercase micro labels, timestamps, citation numbers.
 - **Controls (App&Flow geometry):**
-  - Primary: 52px pill, radius 40, inverted colours (light pill on dark), 12px/700 label, squish keyframe on hover.
+  - Primary: 52px pill, radius 40, inverted colours (dark pill on light), 12px/700 label, squish keyframe on hover.
   - Ghost: dotted SVG pill outline. Tile: 50px, radius 16, 6% tint.
   - Round icon buttons. A floating segmented tab bar with backdrop blur.
 - **Surfaces:** cards with radius 24 and 32px padding, never nested. Thin 1px borders only where whitespace can't separate.

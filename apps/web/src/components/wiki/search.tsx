@@ -32,7 +32,7 @@ export function WikiSearch({ pages }: { pages: P[] }) {
         open={open}
         onOpenChange={setOpen}
         label="Find a page"
-        overlayClassName="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+        overlayClassName="fixed inset-0 z-50 bg-ink/10 backdrop-blur-[6px]"
         contentClassName="fixed left-1/2 top-[18vh] z-50 w-[min(600px,calc(100vw-32px))] -translate-x-1/2 overflow-hidden rounded-card border border-line bg-raised shadow-2xl"
       >
         <Command.Input autoFocus placeholder="Type a title or topic" className="h-14 w-full border-b border-line bg-transparent px-5 text-[16px] text-ink placeholder:text-ink-3 outline-none" />

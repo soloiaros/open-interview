@@ -19,7 +19,7 @@ export function CitationChip({ info }: { info: CiteInfo }) {
       )}
       <span
         role="tooltip"
-        className="pointer-events-none invisible absolute bottom-[calc(100%+8px)] left-1/2 z-50 w-[300px] -translate-x-1/2 translate-y-1 rounded-tile border border-line bg-raised p-4 text-left text-[13px] leading-snug opacity-0 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.6)] transition-[opacity,transform] duration-200 group-focus-within/cite:visible group-focus-within/cite:translate-y-0 group-focus-within/cite:opacity-100 group-hover/cite:visible group-hover/cite:translate-y-0 group-hover/cite:opacity-100"
+        className="pointer-events-none invisible absolute bottom-[calc(100%+8px)] left-1/2 z-50 w-[300px] -translate-x-1/2 translate-y-1 rounded-tile border border-line bg-raised p-4 text-left text-[13px] leading-snug opacity-0 shadow-[0_8px_24px_-8px_rgba(18,18,18,0.12)] transition-[opacity,transform] duration-200 group-focus-within/cite:visible group-focus-within/cite:translate-y-0 group-focus-within/cite:opacity-100 group-hover/cite:visible group-hover/cite:translate-y-0 group-hover/cite:opacity-100"
       >
         <span className="block text-ink">{info.title}</span>
         {info.meta && <span className="mt-1 block font-mono text-[11px] uppercase text-ink-3">{info.meta}</span>}
