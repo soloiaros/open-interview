@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     .select({ content: chatMessage.content, citations: chatMessage.citations })
     .from(chatMessage)
     .innerJoin(chatThread, eq(chatMessage.threadId, chatThread.id))
-    .where(and(eq(chatMessage.id, messageId), eq(chatThread.orgId, ctx.orgId)));
+    .where(and(eq(chatMessage.id, messageId), eq(chatThread.orgId, ctx.orgId), eq(chatThread.userId, ctx.userId)));
   if (!m) return Response.json({ error: "Not found." }, { status: 404 });
   const title = await summarizeForTitle(m.content);
   const sources = m.citations.map((c) => `- [${c.n}] ${c.kind === "page" ? `[[${c.title}]]` : c.title}`).join("\n");
