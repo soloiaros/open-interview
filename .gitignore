@@ -1,0 +1,25 @@
+node_modules
+.next
+.env
+.env.*
+!.env.example
+*.log
+.venv
+.bin
+.data
+apps/agent/models
+__pycache__
+.DS_Store
+apps/web/next-env.d.ts
+
+# Generated build and local agent state
+*.tsbuildinfo
+*.pyc
+.pytest_cache
+.claude/scheduled_tasks.lock
+
+# Generated build and local agent state
+*.tsbuildinfo
+*.pyc
+.pytest_cache
+.claude/scheduled_tasks.lock
