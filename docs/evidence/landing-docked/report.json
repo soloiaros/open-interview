@@ -1,0 +1,29 @@
+[
+  {
+    "file": "page.png",
+    "state": null,
+    "size": "1440x900",
+    "zoom": 1,
+    "animationWaitMs": 0,
+    "issues": [],
+    "lint": [
+      {
+        "rule": "tightLeading",
+        "label": "多行正文行高过紧",
+        "count": 1,
+        "examples": [
+          "span.serif-i.text-ink-2「We sit those people down」（1.25）"
+        ]
+      },
+      {
+        "rule": "stuck",
+        "label": "首屏有内容停在透明状态（出场动画没触发？）",
+        "count": 2,
+        "examples": [
+          "span.serif-i.text-[40px]「(03)」",
+          "span.serif-i.text-[40px]「(04)」"
+        ]
+      }
+    ]
+  }
+]
