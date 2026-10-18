@@ -17,3 +17,6 @@ apps/web/next-env.d.ts
 *.pyc
 .pytest_cache
 .claude/scheduled_tasks.lock
+
+# Local visual review captures
+docs/evidence/
