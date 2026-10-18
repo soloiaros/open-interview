@@ -1,0 +1,21 @@
+[
+  {
+    "file": "page-1440x900.png",
+    "state": null,
+    "size": "1440x900",
+    "zoom": 1,
+    "animationWaitMs": 0,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "page-390x844.png",
+    "state": null,
+    "size": "390x844",
+    "zoom": 1,
+    "failed": true,
+    "issues": [
+      "第 1 步「fill input[name=email] maren@northwind.io」：找不到元素 input[name=email]；线索：name=\"viewport\"（不可见）；name=\"next-size-adjust\"（不可见）；name=\"description\"（不可见）；例如 fill .open \"maren@northwind.io\"；选择器只在主文档里找，页面里有 0 个 iframe、2 个开放的 shadow root"
+    ]
+  }
+]
